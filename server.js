@@ -22,8 +22,16 @@ app.get('/users', function(req,res){
     })
 })
 
-
-
+// Using Variables in URL
+app.get('/users/:id',function(req,res){
+    //console.log(`data for the user ${id}')
+    console.log("User ID : " +req.params.id)
+	res.json({
+		success: true,
+		message: 'got one user',
+		user_ID : req.params.id,
+	})
+})
 
 
 
