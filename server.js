@@ -1,7 +1,9 @@
 // requiring the express module and its libraries 
 const express = require('express');
-// Making instance of express constructor 
+const bodyParser = require('body-parser');
+// Making instance of express constructor or making app variable 
 const app = express();
+app.use(bodyParser.json());
 // adding port to listen rrequest
 const port = 8000
 
@@ -22,6 +24,9 @@ app.get('/users', function(req,res){
     })
 })
 
+
+
+
 // Using Variables in URL
 app.get('/users/:id',function(req,res){
     //console.log(`data for the user ${id}')
@@ -33,6 +38,28 @@ app.get('/users/:id',function(req,res){
 	})
 })
 
+
+// Loging request on hardcoded data
+app.post('/login',function(req,res){
+    const username=req.body.username;
+    const password=req.body.password;
+
+    const mockUsername="billyTheKid";
+    const mockPassword="superSecret";
+
+    if (username===mockUsername && password===mockPassword){
+         res.json({
+              success: true,
+              message: 'password and username match!',
+              token: 'encrypted token goes here'
+         })
+    } else {
+         res.json({
+              success: false,
+              message: 'password and username do not match'
+         })
+    }
+})
 
 
 // Server activation
